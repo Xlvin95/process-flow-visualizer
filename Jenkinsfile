@@ -9,15 +9,15 @@ pipeline {
             }
         }
 
-   stage('SonarQube Scan') {
+  stage('SonarQube Scan') {
     steps {
         sh '''
         docker run --rm \
         -e SONAR_HOST_URL="http://34.14.134.111:9000" \
-        -v "$PWD:/usr/src" \
+        -v $(pwd):/usr/src \
         sonarsource/sonar-scanner-cli \
         -Dsonar.projectKey=devops-dashboard \
-        -Dsonar.sources=. \
+        -Dsonar.sources=/usr/src \
         -Dsonar.inclusions=**/*.html,**/*.css,**/*.js \
         -Dsonar.host.url=http://34.14.134.111:9000 \
         -Dsonar.login=sqp_63f9a974d7472fb603cf3a5b0524e60287c9f55d
