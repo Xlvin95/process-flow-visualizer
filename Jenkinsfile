@@ -10,17 +10,19 @@ pipeline {
         }
 
         stage('SonarQube Scan') {
-            steps {
-                sh '''
-                docker run --rm \
-                -e SONAR_HOST_URL="http://34.14.134.111:9000" \
-                -e SONAR_LOGIN="sqp_63f9a974d7472fb603cf3a5b0524e60287c9f55d" \
-                -v "$PWD:/usr/src" \
-                sonarsource/sonar-scanner-cli
-                '''
-            }
-        }
-
+    steps {
+        sh '''
+        docker run --rm \
+        -e SONAR_HOST_URL="http://34.14.134.111:9000" \
+        -v "$PWD:/usr/src" \
+        sonarsource/sonar-scanner-cli \
+        -Dsonar.projectKey=devops-dashboard \
+        -Dsonar.sources=. \
+        -Dsonar.host.url=http://34.14.134.111:9000 \
+        -Dsonar.login=sqp_63f9a974d7472fb603cf3a5b0524e60287c9f55d
+        '''
+    }
+}
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t devops-dashboard .'
