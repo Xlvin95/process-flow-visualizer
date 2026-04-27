@@ -9,25 +9,22 @@ pipeline {
             }
         }
 
-  stage('SonarQube Scan') {
-    steps {
-        script {
-            def workspace = sh(script: "pwd", returnStdout: true).trim()
-            
-            sh """
-            docker run --rm \
-            -e SONAR_HOST_URL=http://34.14.134.111:9000 \
-            -v ${workspace}:/usr/src \
-            sonarsource/sonar-scanner-cli \
-            -Dsonar.projectKey=devops-dashboard \
-            -Dsonar.sources=/usr/src \
-            -Dsonar.inclusions=**/*.html,**/*.css,**/*.js \
-            -Dsonar.host.url=http://34.14.134.111:9000 \
-            -Dsonar.login=sqp_63f9a974d7472fb603cf3a5b0524e60287c9f55d
-            """
+        stage('SonarQube Scan') {
+            steps {
+                sh '''
+                docker run --rm \
+                -e SONAR_HOST_URL="http://34.14.134.111:9000" \
+                -v $(pwd):/usr/src \
+                sonarsource/sonar-scanner-cli \
+                -Dsonar.projectKey=devops-dashboard \
+                -Dsonar.sources=/usr/src \
+                -Dsonar.inclusions=**/*.html,**/*.css,**/*.js \
+                -Dsonar.host.url=http://34.14.134.111:9000 \
+                -Dsonar.login=sqp_63f9a974d7472fb603cf3a5b0524e60287c9f55d
+                '''
+            }
         }
-    }
-}
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t devops-dashboard .'
