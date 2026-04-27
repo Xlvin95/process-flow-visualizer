@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/Xlvin95/process-flow-visualizer.git'
+                git branch: 'main', url: 'https://github.com/Xlvin95/process-flow-visualizer.git'
             }
         }
 
