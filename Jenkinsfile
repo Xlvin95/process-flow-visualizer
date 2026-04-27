@@ -23,8 +23,7 @@ pipeline {
         -Dsonar.login=sqp_63f9a974d7472fb603cf3a5b0524e60287c9f55d
         '''
     }
-}
-        stage('Build Docker Image') {
+}      stage('Build Docker Image') {
             steps {
                 sh 'docker build -t devops-dashboard .'
             }
