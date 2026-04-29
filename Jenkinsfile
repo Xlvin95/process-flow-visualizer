@@ -29,6 +29,13 @@ pipeline {
                 sh 'docker build -t devops-dashboard .'
             }
         }
+        stage('Trivy Scan') {
+            steps {
+                sh '''
+                trivy image --severity HIGH,CRITICAL --exit-code 0 devops-dashboard
+                '''
+           }
+       }
 
         stage('Run Container') {
             steps {
