@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                 docker run --rm \
-                -e SONAR_HOST_URL="http://34.14.134.111:9000" \
+                -e SONAR_HOST_URL="http://35.200.232.139:9000" \
                 -v $(pwd):/usr/src \
                 sonarsource/sonar-scanner-cli \
                 -Dsonar.projectKey=devops-dashboard \
