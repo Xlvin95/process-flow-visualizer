@@ -20,7 +20,7 @@ pipeline {
                 -Dsonar.sources=/usr/src \
                 -Dsonar.inclusions=**/*.html,**/*.css,**/*.js \
                 -Dsonar.host.url=http://34.14.134.111:9000 \
-                -Dsonar.login=sqp_63f9a974d7472fb603cf3a5b0524e60287c9f55d
+                -Dsonar.login=sqp_b6e18582c7acc2e427af9c4e2d23a9186e6d7273
                 '''
             }
         }
